@@ -7,7 +7,7 @@ Takes an XML file created by CSEXPORT, and produces a CSV file more suitable for
 Supports both single-valued attributes and multi-valued attributes
 
 	.EXAMPLE
-	.\FIMSync-Engine-Parse-ChangesOnly.ps1 -sourceXML C:\MAExport.xml -targetCSV C:\MAExport.csv
+	.\fim-parse-csexport-changes.ps1 -sourceXML C:\MAExport.xml -targetCSV C:\MAExport.csv
 #>
 
 Param(
@@ -33,8 +33,6 @@ $i = 0
 ForEach ($csObject In $xmlCSExportDoc."cs-objects"."cs-object") {
     $i = $i + 1
     Write-Host $i
-    #	$attrName = $csObject.SelectNodes('//unapplied-export/delta/attr')
-    #	$attrRefName = $csObject.SelectNodes('//unapplied-export/delta/dn-attr')
     $attrName = $csObject.'unapplied-export'.'delta'.'attr'
     $attrRefName = $csObject.'unapplied-export'.'delta'.'dn-attr'
     $attr = $attrName, $attrRefName
